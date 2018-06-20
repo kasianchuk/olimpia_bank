@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # rake load_database:loading
 
 namespace :load_database do
@@ -13,7 +11,9 @@ namespace :load_database do
 
     data['users'].each do |_, user_data|
       user = User.create!(name:     user_data['name'],
-                          password: user_data['password'])
+                          email: "#{user_data['name']}@olimpia.com",
+                          password: user_data['password'],
+                          password_confirmation: user_data['password'])
       arr.push(user.id, user.id)
     end
 
