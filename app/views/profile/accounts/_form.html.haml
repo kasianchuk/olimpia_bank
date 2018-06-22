@@ -1,0 +1,15 @@
+%h1
+  Please #{params["action"]} money
+
+.companies_search-block
+  = form_tag operation_profile_accounts_path do
+    %p Current Account balance is #{@balance}
+
+    .field
+      = label_tag 'Enter amount'
+      = text_field_tag 'calculation[amount]'
+    .field
+      = hidden_field_tag 'calculation[operation]', "#{params['action']}"
+      = hidden_field_tag 'calculation[account_id]', "#{params['id']}"
+    .actions
+      = submit_tag 'Save'

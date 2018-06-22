@@ -1,9 +1,17 @@
 Rails.application.routes.draw do
-  root to: 'users#index'
-
+  root to: 'profile#dashboard'
   devise_for :users
+
+  namespace :profile do
+    resources :accounts do
+      get 'deposite', on: :member
+      get 'withdraw', on: :member
+      collection do
+        post 'operation', as: :operation
+      end
+    end
+  end
 
   resources :accounts
   resources :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
