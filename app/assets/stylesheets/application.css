@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+ .move_block {
+   margin-top: 50px
+ }
