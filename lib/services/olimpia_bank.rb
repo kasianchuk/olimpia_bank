@@ -8,7 +8,7 @@ module Services
 
     def calculate
       account = Account.find(account_id)
-      account.update_columns(balance: account.balance + ammount) if deposite?
+      account.update_columns(balance: account.balance + ammount) if deposit?
       account.update_columns(balance: account.balance - ammount) if withdraw?
     end
 
@@ -16,8 +16,8 @@ module Services
 
     attr_reader :operation, :account_id, :ammount
 
-    def deposite?
-      operation == 'deposite'
+    def deposit?
+      operation == 'deposit'
     end
 
     def withdraw?
