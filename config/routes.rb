@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
   root to: 'profile#dashboard'
+  get 'profile/dashboard'
   devise_for :users
 
-  namespace :profile do
+  resources :accounts
+
+  resources :users do
     resources :accounts do
-      get 'deposite', on: :member
+      get 'deposit', on: :member
       get 'withdraw', on: :member
       collection do
         post 'operation', as: :operation
       end
     end
   end
-
-  resources :accounts
-  resources :users
 end
