@@ -1,13 +1,13 @@
 %p#notice= notice
 %p
   %strong User:
-  = @account.user
+  = @account.user.name
 %p
   %strong Balance:
   = @account.balance
 %p
   %strong Currency:
   = @account.currency
-= link_to 'Edit', edit_account_path(@account)
+= link_to 'Edit', edit_user_account_path(current_user, @account)
 |
-= link_to 'Back', accounts_path
+= link_to 'Back', root_path

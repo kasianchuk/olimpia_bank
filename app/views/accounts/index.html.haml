@@ -1,5 +1,8 @@
 %p#notice= notice
 %h1 Accounts
+
+= link_to "My_accounts", root_path
+
 %table
   %thead
     %tr
@@ -13,8 +16,4 @@
         %td= account.user.name
         %td= account.balance
         %td= account.currency
-        %td= link_to 'Show', account
-        %td= link_to 'Edit', edit_account_path(account)
-        %td= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }
 %br/
-= link_to 'New Account', new_account_path

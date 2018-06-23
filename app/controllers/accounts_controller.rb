@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action :set_account, only: [:show, :edit, :update, :destroy, :deposit, :withdraw]
   before_action :authenticate_user!
 
   # GET /accounts
@@ -29,7 +29,7 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       if @account.save
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
+        format.html { redirect_to user_account_path(current_user, @account), notice: 'Account was successfully created.' }
         format.json { render :show, status: :created, location: @account }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class AccountsController < ApplicationController
   def update
     respond_to do |format|
       if @account.update(account_params)
-        format.html { redirect_to @account, notice: 'Account was successfully updated.' }
+        format.html { redirect_to user_account_path(current_user, @account), notice: 'Account was successfully updated.' }
         format.json { render :show, status: :ok, location: @account }
       else
         format.html { render :edit }
@@ -57,9 +57,22 @@ class AccountsController < ApplicationController
   def destroy
     @account.destroy
     respond_to do |format|
-      format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Account was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def deposit
+    @balance = @account.balance
+  end
+
+  def withdraw
+    @balance = @account.balance
+  end
+
+  def operation
+    Services::OlimpiaBank.new(calculation_params).calculate
+    redirect_to root_path, notice: 'Account amount successfully update.'
   end
 
   private
@@ -71,5 +84,9 @@ class AccountsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
       params.require(:account).permit(:user_id, :balance, :currency)
+    end
+
+    def calculation_params
+      params.require(:calculation).permit(:amount, :operation, :account_id)
     end
 end
