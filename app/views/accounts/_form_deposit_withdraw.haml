@@ -1,8 +1,7 @@
 %h1
   Please #{params["action"]} money
-
 .companies_search-block
-  = form_tag operation_user_accounts_path do
+  = form_tag(:controller => 'accounts', :action => "#{params['action']}_operation") do
     %p Current Account balance is #{@balance}
 
     .field

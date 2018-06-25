@@ -70,8 +70,13 @@ class AccountsController < ApplicationController
     @balance = @account.balance
   end
 
-  def operation
-    Services::OlimpiaBank.new(calculation_params).calculate
+  def deposit_operation
+    Services::DepositOperation.new(calculation_params).calculate
+    redirect_to root_path, notice: 'Account amount successfully update.'
+  end
+
+  def withdraw_operation
+    Services::WithdrawOperation.new(calculation_params).calculate
     redirect_to root_path, notice: 'Account amount successfully update.'
   end
 

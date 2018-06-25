@@ -10,7 +10,8 @@ Rails.application.routes.draw do
       get 'deposit', on: :member
       get 'withdraw', on: :member
       collection do
-        post 'operation', as: :operation
+        post 'deposit_operation', as: :deposit_operation
+        post 'withdraw_operation', as: :withdraw_operation
       end
     end
   end
