@@ -10,18 +10,27 @@ namespace :load_database do
     index = 0
 
     data['users'].each do |_, user_data|
-      user = User.create!(name:     user_data['name'],
-                          email: "#{user_data['name']}@olimpia.com",
-                          password: user_data['password'],
-                          password_confirmation: user_data['password'])
+      user = User.find_or_create_by(name:     user_data['name'],
+                                    email: "#{user_data['name']}@olimpia.com",
+                                    password: user_data['password'])
       arr.push(user.id, user.id)
     end
 
     data['accounts'].each do |_, account_data|
-      Account.create!(balance:  account_data['balance'],
-                      currency: account_data['currency'],
-                      user_id:  arr[index])
+      Account.find_or_create_by(balance:  account_data['balance'],
+                                currency: account_data['currency'],
+                                user_id:  arr[index])
       index += 1
+    end
+
+    data['deposits'].each do |_, deposit_data|
+      Deposit.find_or_create_by(amount:  deposit_data['amount'],
+                                account_id:  Account.first.id)
+    end
+
+    data['witdraws'].each do |_, withdraw_data|
+      Withdraw.find_or_create_by(amount:  withdraw_data['amount'],
+                                 account_id:  Account.first.id)
     end
   end
 end
