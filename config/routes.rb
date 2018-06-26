@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   root to: 'profile#dashboard'
   get 'profile/dashboard'
+  get 'profile/transactions'
+
   devise_for :users
 
   resources :accounts
+  resources :deposits
 
   resources :users do
     resources :accounts do

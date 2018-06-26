@@ -1,0 +1,13 @@
+%h3.text-center List of your Withdraws
+%table.table
+  %thead
+    %tr
+      %th Account id - currency
+      %th Amount
+      %th Transaction time
+  %tbody
+    - @withdraws.each do |withdraw|
+      %tr
+        %td= withdraw.account_id_currency
+        %td= withdraw.amount
+        %td= withdraw.transaction_time

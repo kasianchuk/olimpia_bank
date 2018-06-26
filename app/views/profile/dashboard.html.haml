@@ -3,7 +3,7 @@
   Hello #{current_user.name}. Thank you for visit Olimpia bank
 
 %h2.move_block List of your account
-%table
+%table.table
   %thead
     %tr
       %th Balance
@@ -17,5 +17,8 @@
         %td= link_to 'Deposit', deposit_user_account_path(current_user,account)
         %td= link_to 'Withdraw', withdraw_user_account_path(current_user,account)
         %td= link_to 'Destroy', user_account_path(current_user,account), method: :delete, data: { confirm: 'Are you sure?' }
-%br/
+
+.mt-5
 = link_to 'New Account', new_user_account_path(current_user)
+.mt-3
+= link_to 'Transaction History', profile_transactions_path

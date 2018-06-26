@@ -1,0 +1,13 @@
+%h3.text-center List of your Deposits
+%table.table
+  %thead
+    %tr
+      %th Account id - currency
+      %th Amount
+      %th Transaction time
+  %tbody
+    - @deposits.each do |deposit|
+      %tr
+        %td= deposit.account_id_currency
+        %td= deposit.amount
+        %td= deposit.transaction_time

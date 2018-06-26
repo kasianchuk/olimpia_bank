@@ -1,0 +1,12 @@
+%h2.text-center History of transactions
+= form_tag profile_transactions_path, method: :get do
+  .form-control
+    = text_field_tag 'deposit_id', params[:deposit_id], placeholder: 'Enter deposit id'
+    = text_field_tag 'withdraw_id', params[:withdraw_id], placeholder: 'Enter withdraw id'
+    = submit_tag 'Search'
+.row.mt-5
+  .col-6
+    = render 'deposit_operation'
+  .col-6
+    = render 'withdraw_operation'
+= link_to 'Back', root_path
