@@ -8,5 +8,6 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = link_to'Sign out', destroy_user_session_path, method: :delete if user_signed_in?
-    = yield
+    .container
+      = link_to'Sign out', destroy_user_session_path, method: :delete if user_signed_in?
+      = yield

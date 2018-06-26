@@ -13,7 +13,8 @@
  *= require_tree .
  *= require_self
  */
-
+ @import "bootstrap";
+ 
  .move_block {
    margin-top: 50px
  }

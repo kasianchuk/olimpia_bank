@@ -37,6 +37,7 @@ gem 'devise'
 gem "haml-rails", "~> 1.0"
 
 gem 'pg', '~> 0.18.4'
+gem 'bootstrap', '~> 4.1.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -51,6 +52,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
+  gem 'bullet'
 end
 
 group :test do
