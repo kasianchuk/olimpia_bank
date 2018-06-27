@@ -1,0 +1,19 @@
+%p#notice= notice
+%h1 Accounts
+
+= link_to "My_accounts", root_path
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Balance
+      %th Currency
+      %th{:colspan => "3"}
+  %tbody
+    - @accounts.each do |account|
+      %tr
+        %td= account.user.name
+        %td= account.balance
+        %td= account.currency
+%br/
