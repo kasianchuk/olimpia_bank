@@ -14,11 +14,12 @@
       %tr
         %td= account.balance
         %td= account.currency
-        %td= link_to 'Deposit', deposit_user_account_path(current_user,account)
-        %td= link_to 'Withdraw', withdraw_user_account_path(current_user,account)
+        %td= link_to 'Deposit', new_account_deposit_path(account)
+        %td= link_to 'Withdrawal', new_account_withdrawal_path(account)
         %td= link_to 'Destroy', user_account_path(current_user,account), method: :delete, data: { confirm: 'Are you sure?' }
 
 .mt-5
 = link_to 'New Account', new_user_account_path(current_user)
 .mt-3
+
 = link_to 'Transaction History', profile_transactions_path
