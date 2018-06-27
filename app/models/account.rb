@@ -3,6 +3,5 @@ class Account < ApplicationRecord
 
   validates :balance, presence: true
 
-  has_many :deposits, dependent: :destroy
-  has_many :withdraws, dependent: :destroy
+  has_many :money_operations, dependent: :destroy
 end
