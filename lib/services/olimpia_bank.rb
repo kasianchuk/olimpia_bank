@@ -2,7 +2,6 @@ module Services
   class OlimpiaBank
     def initialize(options = {})
       @amount = options.fetch(:amount).to_i
-      @operation = options.fetch(:operation)
       @account_id = options.fetch(:account_id)
     end
 
