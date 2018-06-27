@@ -14,7 +14,21 @@ Rails.application.routes.draw do
   end
 
   resources :accounts, only: [:index] do
-    resources :deposits, only: [:index, :new, :create]
-    resources :withdrawals, only: [:index, :new, :create]
+    resources :deposits, only: [:new, :create]
+    resources :withdrawals, only: [:new, :create]
+  end
+
+  namespace :api do
+    namespace :v1 do
+
+      resources :users do
+        resources :accounts
+      end
+
+      resources :accounts, only: [:index] do
+        resources :deposits, only: [:new, :create]
+        resources :withdrawals, only: [:new, :create]
+      end
+    end
   end
 end
