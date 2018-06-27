@@ -19,12 +19,14 @@ class ProfileController < ApplicationController
   end
 
   def deposit_transaction
-    @deposits = Deposit.where(account_id: accounts.ids).includes(:account)
-    @deposits = @deposits.by_id(params[:deposit_id]) if params[:deposit_id].present?
+    @deposits = MoneyOperation.where(account_id: accounts.ids,
+                                     operation: 'deposit').includes(:account)
+    @deposits = @deposits.by_deposit(params[:deposit_id]) if params[:deposit_id].present?
   end
 
   def withdraw_transaction
-    @withdraws = Withdraw.where(account_id: accounts.ids).includes(:account)
-    @withdraws = @withdraws.by_id(params[:withdraw_id]) if params[:withdraw_id].present?
+    @withdraws = MoneyOperation.where(account_id: accounts.ids,
+                                      operation: 'withdraw').includes(:account)
+    @withdraws = @withdraws.by_withdraw(params[:withdraw_id]) if params[:withdraw_id].present?
   end
 end
