@@ -5,6 +5,7 @@ module Services
     DEPOSIT = 'deposit'
 
     def calculate
+      common_operation_errors(amount)
       target_account.update_columns(balance: target_account.balance + amount)
       MoneyOperation.create!(amount: amount, operation: DEPOSIT,
                              account_id: target_account.id)
