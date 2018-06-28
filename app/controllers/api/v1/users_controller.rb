@@ -1,12 +1,13 @@
 module Api::V1
   class UsersController < BaseController
-    
+
     def index
       render json: users
     end
 
-    # def show
-    #   render json: user.to_json(on)
+    def show
+      render json: user
+    end
 
     private
 

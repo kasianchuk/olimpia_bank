@@ -1,6 +1,7 @@
 module Api::V1
   class BaseController < ActionController::API
     include ActionController::HttpAuthentication::Token::ControllerMethods
+    rescue_from ActiveRecord::RecordNotFound, with: :not_found
     before_action :authenticate
 
     private
@@ -19,6 +20,12 @@ module Api::V1
       render json: {
         error_message: 'Bad credentials'
       }, status: :unauthorized
+    end
+
+    def not_found
+      render json: {
+        error_message: 'Not found'
+      }, status: :not_found
     end
   end
 end
