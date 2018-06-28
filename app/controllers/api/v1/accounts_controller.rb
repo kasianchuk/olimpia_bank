@@ -5,11 +5,11 @@ module Api::V1
     DELETE_RECORD = 'record deleted'
 
     def index
-      render json: accounts
+      render json: accounts, each_serializer: AccountSerializer
     end
 
     def show
-      render json: account
+      render json: account, each_serializer: AccountSerializer
     end
 
     def create
@@ -22,14 +22,6 @@ module Api::V1
       end
     end
 
-    # def update
-    #   if account.update(account_params)
-    #     render json: account
-    #   else
-    #     render json: account.errors, status: :unprocessable_entity
-    #   end
-    # end
-
     def destroy
       account.destroy
       render json: { message: DELETE_RECORD }, status: :ok
@@ -37,12 +29,16 @@ module Api::V1
 
     private
 
+    def user
+      @user ||= User.find(params[:user_id])
+    end
+
     def account
-      @account ||= Account.find(params[:id])
+      @account ||= user.accounts.find(params[:id])
     end
 
     def accounts
-      @accounts ||= Account.all
+      @accounts ||= user.accounts.includes(:money_operations)
     end
 
     def account_params

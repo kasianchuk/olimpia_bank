@@ -38,6 +38,7 @@ gem "haml-rails", "~> 1.0"
 
 gem 'pg', '~> 0.18.4'
 gem 'bootstrap', '~> 4.1.1'
+gem 'active_model_serializers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
