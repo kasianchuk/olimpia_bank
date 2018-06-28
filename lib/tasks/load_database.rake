@@ -24,13 +24,15 @@ namespace :load_database do
     end
 
     data['deposits'].each do |_, deposit_data|
-      Deposit.find_or_create_by(amount:  deposit_data['amount'],
-                                account_id:  Account.first.id)
+      MoneyOperation.find_or_create_by(amount:  deposit_data['amount'],
+                                       operation: 'deposit',
+                                       account_id:  Account.first.id)
     end
 
     data['witdraws'].each do |_, withdraw_data|
-      Withdraw.find_or_create_by(amount:  withdraw_data['amount'],
-                                 account_id:  Account.first.id)
+      MoneyOperation.find_or_create_by(amount:  withdraw_data['amount'],
+                                       operation: 'withdraw',
+                                       account_id:  Account.first.id)
     end
   end
 end

@@ -7,7 +7,6 @@ describe Api::V1::DepositsController, type: :request do
   let(:user) { create(:user, accounts: [account]) }
 
   SUCCESS_DEPOSIT = 'You make deposit'
-  VALUE = 'test value'
 
   describe 'Create' do
     context 'success response valid data' do
