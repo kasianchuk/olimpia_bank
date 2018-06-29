@@ -1,7 +1,7 @@
 class ProfileController < ApplicationController
   before_action :authenticate_user!
 
-  layout 'profile'
+  layout :desktop_or_mobile
 
   def dashboard
     accounts
@@ -28,5 +28,9 @@ class ProfileController < ApplicationController
     @withdraws = MoneyOperation.where(account_id: accounts.ids,
                                       operation: 'withdraw').includes(:account)
     @withdraws = @withdraws.by_withdraw(params[:withdraw_id]) if params[:withdraw_id].present?
+  end
+
+  def desktop_or_mobile
+    mobile_device? ? 'profile.mobile' : 'profile'
   end
 end
