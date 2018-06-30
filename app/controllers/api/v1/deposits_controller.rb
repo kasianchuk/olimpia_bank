@@ -11,6 +11,14 @@ module Api::V1
 
     private
 
+    def account
+      @account ||= Account.find(params[:account_id])
+    end
+
+    def user
+      @user ||= account.user
+    end
+
     def calculation_params
       params.require(:calculation).permit(:amount, :account_id)
     end
