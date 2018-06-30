@@ -12,6 +12,6 @@ class User < ApplicationRecord
   private
 
   def nope
-    raise "nope!"
+    raise 'nope!'
   end
 end

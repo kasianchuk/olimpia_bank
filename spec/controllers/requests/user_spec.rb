@@ -35,8 +35,8 @@ describe Api::V1::UsersController, type: :request do
 
     it 'get correct json responce' do
       put "/api/v1/users/#{user.id}",
-        headers: { 'Authorization': "Bearer #{user.token}" },
-        params: { user: { name: NAME, password: PASSWORD, email: EMAIL } }
+          headers: { 'Authorization': "Bearer #{user.token}" },
+          params: { user: { name: NAME, password: PASSWORD, email: EMAIL } }
       expect(response.status).to eq(200)
       expect(response.message).to eq(OK)
     end

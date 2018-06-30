@@ -1,6 +1,5 @@
 module Api::V1
   class UsersController < BaseController
-
     def show
       render json: user, each_serializer: UserSerializer
     end

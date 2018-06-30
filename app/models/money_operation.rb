@@ -9,7 +9,6 @@ class MoneyOperation < ApplicationRecord
     "#{account.id} - #{account.currency}"
   end
 
-
   def transaction_time
     created_at.try(:strftime, '%d %B %Y')
   end

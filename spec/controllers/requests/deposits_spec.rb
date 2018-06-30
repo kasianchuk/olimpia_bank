@@ -13,8 +13,8 @@ describe Api::V1::DepositsController, type: :request do
     context 'success response valid data' do
       it 'response status' do
         post "/api/v1/accounts/#{account.id}/deposits",
-          headers: { 'Authorization': "Bearer #{user.token}" },
-          params: { calculation: { amount: 1_000, account_id: account.id } }
+             headers: { 'Authorization': "Bearer #{user.token}" },
+             params: { calculation: { amount: 1_000, account_id: account.id } }
         json_body = JSON.parse(response.body)
         expect(response.status).to eq(201)
         expect(json_body['message']).to eq(SUCCESS_DEPOSIT)
@@ -25,16 +25,16 @@ describe Api::V1::DepositsController, type: :request do
       it 'enter negative amount' do
         expect do
           post "/api/v1/accounts/#{account.id}/deposits",
-            headers: { 'Authorization': "Bearer #{user.token}" },
-            params: { calculation: { amount: -1_000, account_id: account.id } }
+               headers: { 'Authorization': "Bearer #{user.token}" },
+               params: { calculation: { amount: -1_000, account_id: account.id } }
         end.to raise_error(Services::OperationErrors::NegativeAmount)
       end
 
       it 'enter String amount' do
         expect do
           post "/api/v1/accounts/#{account.id}/deposits",
-            headers: { 'Authorization': "Bearer #{user.token}" },
-            params: { calculation: { amount: VALUE, account_id: account.id } }
+               headers: { 'Authorization': "Bearer #{user.token}" },
+               params: { calculation: { amount: VALUE, account_id: account.id } }
         end.to raise_error(Services::OperationErrors::ZeroAmount)
       end
     end

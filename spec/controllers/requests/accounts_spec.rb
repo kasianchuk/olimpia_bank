@@ -78,8 +78,8 @@ describe Api::V1::AccountsController, type: :request do
     context 'success response' do
       it 'response status' do
         post "/api/v1/users/#{user.id}/accounts",
-          headers: { 'Authorization': "Bearer #{user.token}" },
-          params: { account: { user_id: user.id, balance: 1000, currency: CURRENCY_UAH } }
+             headers: { 'Authorization': "Bearer #{user.token}" },
+             params: { account: { user_id: user.id, balance: 1000, currency: CURRENCY_UAH } }
         expect(response.status).to eq(201)
         expect(response.message).to eq(CREATED)
       end
@@ -101,7 +101,7 @@ describe Api::V1::AccountsController, type: :request do
     context 'success response' do
       it 'response status' do
         delete "/api/v1/users/#{user.id}/accounts/#{account.id}",
-          headers: { 'Authorization': "Bearer #{user.token}" }
+               headers: { 'Authorization': "Bearer #{user.token}" }
         json_body = JSON.parse(response.body)
         expect(json_body['message']).to eq(DELETE_RECORD)
         expect(response.status).to eq(200)
@@ -112,7 +112,7 @@ describe Api::V1::AccountsController, type: :request do
     context 'not success response' do
       it 'response status, delete not exist account ' do
         delete "/api/v1/users/#{user.id}/accounts/#{rand(10_000)}",
-          headers: { 'Authorization': "Bearer #{user.token}" }
+               headers: { 'Authorization': "Bearer #{user.token}" }
         expect(response.status).to eq(404)
         expect(response.message).to eq(NOT_FOUND)
       end
