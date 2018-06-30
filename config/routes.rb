@@ -20,14 +20,13 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-
-      resources :users do
+      resources :users, only: [:show, :update] do
         resources :accounts
       end
 
-      resources :accounts, only: [:index] do
-        resources :deposits, only: [:new, :create]
-        resources :withdrawals, only: [:new, :create]
+      resources :accounts, only: [] do
+        resources :deposits, only: [:create]
+        resources :withdrawals, only: [:create]
       end
     end
   end
