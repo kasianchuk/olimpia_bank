@@ -12,7 +12,7 @@ module Api::V1
 
     def authenticate_token
       authenticate_with_http_token do |token, _|
-        User.find_by(token: token)
+        User.find_by(token: token, id: user.id)
       end
     end
 
