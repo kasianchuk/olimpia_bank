@@ -7,7 +7,6 @@ describe Api::V1::WithdrawalsController, type: :request do
   let(:user) { create(:user, accounts: [account]) }
 
   SUCCESS_OPERATION = 'You make withdrawal'
-  VALUE = 'test value'
 
   describe 'Create' do
     context 'success response valid data' do

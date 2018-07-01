@@ -12,7 +12,6 @@ describe Api::V1::AccountsController, type: :request do
   NOT_BLANK = "can't be blank"
   CURRENCY_UAH = 'UAH'
   CURRENCY_USD = 'USD'
-  OK = 'OK'
   DELETE_RECORD = 'record deleted'
   NOT_FOUND = 'Not Found'
 
