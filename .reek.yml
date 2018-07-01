@@ -1,0 +1,14 @@
+detectors:
+  IrresponsibleModule:
+    enabled: false
+
+  UncommunicativeModuleName:
+    reject:
+      - app/controllers/api/v1/
+  #
+  # FeatureEnvy:
+  #   exclude:
+  #     - db/migrate
+
+exclude_paths:
+  - db/migrate
