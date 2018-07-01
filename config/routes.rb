@@ -9,15 +9,16 @@ Rails.application.routes.draw do
     resources :users
   end
 
-  resources :users do
+  resources :users, only: %i[show edit update] do
     resources :accounts
   end
 
-  resources :accounts, only: [:index] do
+  resources :accounts, only: [] do
     resources :deposits, only: %i[new create]
     resources :withdrawals, only: %i[new create]
   end
 
+  # API routes
   namespace :api do
     namespace :v1 do
       resources :users, only: %i[show update] do
