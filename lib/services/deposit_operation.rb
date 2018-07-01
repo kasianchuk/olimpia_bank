@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Services
+  # The DepositOperation class is responsible for deposit money
+
   class DepositOperation < Services::OlimpiaBank
     DEPOSIT = 'deposit'
 

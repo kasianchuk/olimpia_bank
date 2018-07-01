@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Services
+  # The OlimpiaBank class is basic class
+
   class OlimpiaBank
     def initialize(options = {})
       @amount = options.fetch(:amount).to_i

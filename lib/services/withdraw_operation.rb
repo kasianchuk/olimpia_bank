@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Services
+  # The WithdrawOperation class is responsible for deposit money
+
   class WithdrawOperation < Services::OlimpiaBank
     WITHDRAW = 'withdraw'
     def calculate
