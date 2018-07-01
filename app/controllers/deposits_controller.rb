@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-class DepositsController < ApplicationController
-  before_action :set_account, only: [:new]
+class DepositsController < BaseController
   before_action :authenticate_user!
+  before_action :set_account, only: [:new]
 
   layout 'profile'
 
   def new
-    @balance = @account.balance
+    @balance = set_account.balance
   end
 
   def create

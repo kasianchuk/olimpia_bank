@@ -1,11 +1,11 @@
-class WithdrawalsController < ApplicationController
-  before_action :set_account, only: [:new]
+class WithdrawalsController < BaseController
   before_action :authenticate_user!
+  before_action :set_account, only: [:new]
 
   layout 'profile'
 
   def new
-    @balance = @account.balance
+    @balance = set_account.balance
   end
 
   def create
