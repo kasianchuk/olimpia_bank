@@ -8,6 +8,6 @@
 %p
   %strong Currency:
   = @account.currency
-= link_to 'Edit', edit_user_account_path(current_user, @account)
+= link_to 'Edit', edit_admin_account_path(@account)
 |
-= link_to 'Back', root_path
+= link_to 'Back', admin_accounts_path
