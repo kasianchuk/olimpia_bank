@@ -1,23 +1,21 @@
 class AccountsController < BaseController
   before_action :authenticate_user!
-  before_action :set_account, only: %i[show edit update destroy]
+  before_action :account, only: %i[show edit update destroy]
 
   def index
-    index_accounts
     authorize index_accounts
   end
 
   def show
-    authorize set_account
+    authorize account
   end
 
   def new
-    new_account
     authorize new_account
   end
 
   def edit
-    authorize set_account
+    authorize account
   end
 
   def create
@@ -30,8 +28,8 @@ class AccountsController < BaseController
   end
 
   def update
-    authorize set_account
-    if set_account.update(account_params)
+    authorize account
+    if account.update(account_params)
       redirect_to root_path, notice: 'Account was successfully updated.'
     else
       render :edit
@@ -39,14 +37,14 @@ class AccountsController < BaseController
   end
 
   def destroy
-    authorize set_account
-    set_account.destroy
+    authorize account
+    account.destroy
     redirect_to root_path, notice: 'Account was successfully destroyed.'
   end
 
   private
 
-  def set_account
+  def account
     @account = current_user.accounts.find(params[:id])
   end
 

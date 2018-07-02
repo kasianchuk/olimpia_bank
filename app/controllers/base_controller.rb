@@ -3,13 +3,6 @@ class BaseController < ApplicationController
   protect_from_forgery
 
   def pundit_user
-    Services::Authorization::AccountContext.new(pundit_params)
-  end
-
-  private
-
-  def pundit_params
-    { current_user: current_user,
-      params_user_id: params[:user_id] }
+    Services::Authorization::AccountContext.new(current_user, params[:user_id])
   end
 end

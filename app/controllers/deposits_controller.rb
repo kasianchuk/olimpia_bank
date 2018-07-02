@@ -2,24 +2,24 @@
 
 class DepositsController < BaseController
   before_action :authenticate_user!
-  before_action :set_account, only: %i[new create]
+  before_action :account, only: %i[new create]
 
   layout 'profile'
 
   def new
-    @balance = set_account.balance
-    authorize set_account
+    @balance = account.balance
+    authorize account
   end
 
   def create
-    authorize set_account
+    authorize account
     Services::DepositOperation.new(calculation_params).calculate
     redirect_to root_path, notice: 'Account amount successfully update.'
   end
 
   private
 
-  def set_account
+  def account
     @account = Account.find(params[:account_id])
   end
 

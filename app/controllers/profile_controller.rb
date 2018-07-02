@@ -4,7 +4,7 @@ class ProfileController < BaseController
   layout 'profile'
 
   def dashboard
-    accounts
+    accounts_index
   end
 
   def transactions
@@ -16,6 +16,10 @@ class ProfileController < BaseController
   end
 
   private
+
+  def accounts_index
+    @accounts = current_user.accounts
+  end
 
   def accounts
     @accounts = current_user.accounts.ids
