@@ -8,6 +8,7 @@ describe Api::V1::DepositsController, type: :request do
 
   SUCCESS_DEPOSIT = 'You make deposit'
   VALUE = 'test value'
+  ERROR_NOT_POSITIVE_AMOUNT = 'ERROR: Please enter positive amount'
 
   describe 'Create' do
     context 'success response valid data' do
@@ -27,7 +28,7 @@ describe Api::V1::DepositsController, type: :request do
           post "/api/v1/accounts/#{account.id}/deposits",
                headers: { 'Authorization': "Bearer #{user.token}" },
                params: { calculation: { amount: -1_000, account_id: account.id } }
-        end.to raise_error(Services::OperationErrors::NegativeAmount)
+        end.to raise_error(RuntimeError, ERROR_NOT_POSITIVE_AMOUNT)
       end
 
       it 'enter String amount' do
@@ -35,7 +36,7 @@ describe Api::V1::DepositsController, type: :request do
           post "/api/v1/accounts/#{account.id}/deposits",
                headers: { 'Authorization': "Bearer #{user.token}" },
                params: { calculation: { amount: VALUE, account_id: account.id } }
-        end.to raise_error(Services::OperationErrors::ZeroAmount)
+        end.to raise_error(RuntimeError, ERROR_NOT_POSITIVE_AMOUNT)
       end
     end
   end

@@ -7,6 +7,7 @@ describe Api::V1::WithdrawalsController, type: :request do
   let(:user) { create(:user, accounts: [account]) }
 
   SUCCESS_OPERATION = 'You make withdrawal'
+  ERROR_NOT_ENOUGH_MONEY = 'ERROR: There is not enough money at the moment in account'
 
   describe 'Create' do
     context 'success response valid data' do
@@ -26,7 +27,7 @@ describe Api::V1::WithdrawalsController, type: :request do
           post "/api/v1/accounts/#{account.id}/withdrawals",
                headers: { 'Authorization': "Bearer #{user.token}" },
                params: { calculation: { amount: -1_000, account_id: account.id } }
-        end.to raise_error(Services::OperationErrors::NegativeAmount)
+        end.to raise_error(RuntimeError, ERROR_NOT_POSITIVE_AMOUNT)
       end
 
       it 'enter String amount' do
@@ -34,7 +35,7 @@ describe Api::V1::WithdrawalsController, type: :request do
           post "/api/v1/accounts/#{account.id}/withdrawals",
                headers: { 'Authorization': "Bearer #{user.token}" },
                params: { calculation: { amount: VALUE, account_id: account.id } }
-        end.to raise_error(Services::OperationErrors::ZeroAmount)
+        end.to raise_error(RuntimeError, ERROR_NOT_POSITIVE_AMOUNT)
       end
 
       it 'enter amount more than Account balance' do
@@ -42,7 +43,7 @@ describe Api::V1::WithdrawalsController, type: :request do
           post "/api/v1/accounts/#{account.id}/withdrawals",
                headers: { 'Authorization': "Bearer #{user.token}" },
                params: { calculation: { amount: 10_000, account_id: account.id } }
-        end.to raise_error(Services::OperationErrors::NotEnoughMoney)
+        end.to raise_error(RuntimeError, ERROR_NOT_ENOUGH_MONEY)
       end
     end
   end
