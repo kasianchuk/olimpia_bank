@@ -2,11 +2,16 @@ class UsersController < BaseController
   before_action :authenticate_user!
   before_action :set_user, only: %i[show edit update]
 
-  def show; end
+  def show
+    authorize set_user
+  end
 
-  def edit; end
+  def edit
+    authorize set_user
+  end
 
   def update
+    authorize set_user
     if set_user.update(user_params)
       redirect_to set_user, notice: 'User was successfully updated.'
     else
