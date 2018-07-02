@@ -1,5 +1,4 @@
 class UserPolicy < ApplicationPolicy
-
   def show?
     user_is_owner_of_record?
   end
@@ -11,7 +10,6 @@ class UserPolicy < ApplicationPolicy
   def update?
     user_is_owner_of_record?
   end
-
 
   private
 

@@ -9,22 +9,43 @@ class ProfileController < BaseController
 
   def transactions
     deposit_transaction
+    find_deposit_by_id if deposit_params.present?
+
     withdraw_transaction
+    find_withdraw_by_id if withdraw_params.present?
   end
 
   private
 
   def accounts
-    @accounts = current_user.accounts
+    @accounts = current_user.accounts.ids
   end
 
   def deposit_transaction
-    @deposits = MoneyOperation.where(account_id: accounts.ids,
-                                     operation: 'deposit').includes(:account)
+    @deposits = Services::Queries::DepositTransactionsQuery.new.call(accounts)
+  end
+
+  def find_deposit_by_id
+    @deposits =
+      Services::Queries::DepositTransactionsQuery
+      .new.by_id(accounts, deposit_params)
   end
 
   def withdraw_transaction
-    @withdraws = MoneyOperation.where(account_id: accounts.ids,
-                                      operation: 'withdraw').includes(:account)
+    @withdraws = Services::Queries::WithdrawTransactionsQuery.new.call(accounts)
+  end
+
+  def find_withdraw_by_id
+    @withdraws =
+      Services::Queries::WithdrawTransactionsQuery
+      .new.by_id(accounts, withdraw_params)
+  end
+
+  def deposit_params
+    params[:deposit_id]
+  end
+
+  def withdraw_params
+    params[:withdraw_id]
   end
 end
