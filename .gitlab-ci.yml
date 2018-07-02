@@ -20,7 +20,20 @@ before_script:
 
 stages:
   - linters
+  - reek
   - test
+
+rubocop:
+  stage: linters
+  script:
+    - gem install rubocop
+    - rubocop
+
+reek:
+  stage: reek
+  script:
+    - gem install reek
+    - reek
 
 rspec:
   stage: test
