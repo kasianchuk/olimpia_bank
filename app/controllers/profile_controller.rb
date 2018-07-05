@@ -1,7 +1,7 @@
 class ProfileController < BaseController
   before_action :authenticate_user!
 
-  layout 'profile'
+  layout :desktop_or_mobile
 
   def dashboard
     accounts_index
@@ -51,5 +51,9 @@ class ProfileController < BaseController
 
   def withdraw_params
     params[:withdraw_id]
+  end
+
+  def desktop_or_mobile
+    mobile_device? ? 'profile.mobile' : 'profile'
   end
 end
